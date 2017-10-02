@@ -7,21 +7,19 @@ $australia = ['Onychogalea lunata', 'Petaurus breviceps', 'Notoryctes', 'Peramel
 $antarctica = ['Globicephala melas', 'Lobodon carcinophagus', 'Phocoena dioptrica', 'Orcinus orca'];
 $world = [$eurasia , $africa, $north_america, $south_america, $australia, $antarctica];
 
+$first_name = [];
+$last_name = [];
+$new_animals = [];
+
 foreach($world as $continent){
 	foreach($continent as $animal){
 		if(strpos($animal, ' ') and substr_count($animal, ' ') < 2){
-			$double_name_animals[] = $animal;
+			$n = strripos($animal, ' ');
+			$len = strlen($animal);
+			$first_name[] = substr($animal, 0, $n);
+			$last_name[] =  substr($animal, $n + 1);
 		};
 	}
-}
-
-foreach($double_name_animals as $dn_animal){
-	$all_animals_name[] = explode(" ", $dn_animal);
-}
-
-foreach($all_animals_name as $key => $value){
-	$first_name[] = $value[0];
-	$last_name[] = $value[1];
 }
 
 shuffle($last_name);
@@ -29,10 +27,7 @@ shuffle($last_name);
 $temp_result = array_map(null, $first_name, $last_name);
 
 foreach($temp_result as $animal){
+	print(implode(" ", $animal).PHP_EOL);
 	$new_animals[] = implode(" ", $animal);
-}
-
-foreach($new_animals as $animal){
-	print($animal.PHP_EOL);
 }
 ?>
