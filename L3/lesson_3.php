@@ -13,11 +13,10 @@ $new_animals = [];
 
 foreach($world as $continent){
 	foreach($continent as $animal){
-		if(strpos($animal, ' ') and substr_count($animal, ' ') < 2){
-			$n = strripos($animal, ' ');
-			$len = strlen($animal);
-			$first_name[] = substr($animal, 0, $n);
-			$last_name[] =  substr($animal, $n + 1);
+		$temp_animal = explode(' ', $animal);
+		if(count($temp_animal) == 2){
+			$first_name[] = $temp_animal[0];
+			$last_name[] = $temp_animal[1];
 		};
 	}
 }
@@ -27,7 +26,7 @@ shuffle($last_name);
 $temp_result = array_map(null, $first_name, $last_name);
 
 foreach($temp_result as $animal){
-	print(implode(" ", $animal).PHP_EOL);
+	print(implode(" ", $animal).'<br>'.PHP_EOL);
 	$new_animals[] = implode(" ", $animal);
 }
 ?>
